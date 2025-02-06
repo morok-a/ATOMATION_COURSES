@@ -43,17 +43,17 @@ const allAdults = ages.every(age => age >= 18);
 console.log(allAdults);
 
 console.log('-------------------------------');
-let typeOfValues = differentValues.map(values => typeof(values));
+const typeOfValues = differentValues.map(values => typeof(values));
 console.log(typeOfValues);
 
 console.log('-------------------------------');
-let joinedArray = numbersArray.concat(ages);
+const joinedArray = numbersArray.concat(ages);
 console.log(joinedArray);
-let partArray = joinedArray.slice(4,8);
+const partArray = joinedArray.slice(4,8);
 console.log(partArray);
 
 console.log('-------------------------------');
-let sentence = separateWords.join(" ");
+const sentence = separateWords.join(" ");
 console.log(sentence);
 
 console.log('-------------------------------');
