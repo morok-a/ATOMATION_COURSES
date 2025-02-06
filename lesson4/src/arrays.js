@@ -1,11 +1,11 @@
-let books = ["Four Wing", "Harry Potter", "ToG"];
+const books = ["Four Wing", "Harry Potter", "ToG"];
 const booleanArray = [true, false, true, false];
-let numbersArray = [1,2,3,4,5,6];
+const numbersArray = [1,2,3,4,5,6];
 const doubledNumbers = [];
-let ages = [ 8, 12, 16, 18, 21, 25, 30];
-let differentValues = [ 1, true, null, "Hello", { key: "answered" }];
-let separateWords = ["My", "name", "is", "Nastya"];
-let needToSort = [1,4,13,2,19,100];
+const ages = [ 8, 12, 16, 18, 21, 25, 30];
+const differentValues = [ 1, true, null, "Hello", { key: "answered" }];
+const separateWords = ["My", "name", "is", "Nastya"];
+const needToSort = [1,4,13,2,19,100];
 
 books.push("ACOTAR");
 console.log(books);
