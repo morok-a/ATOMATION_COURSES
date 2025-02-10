@@ -38,5 +38,5 @@ console.log(author.fullInformation());
 author.age = 78;
 console.log(author.fullInformation());
 author.addBook = "Dark Tower";
-console.log(author.books);
+console.log(author.booksList);
 author.addBook = "It";
