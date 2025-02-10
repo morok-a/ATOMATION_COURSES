@@ -25,7 +25,7 @@ const author = {
     get booksList() {
         return this.books.join(", ");
     },
-    set addBook(newBook) {
+    addBook(newBook) {
         if (!this.books.includes(newBook)) {
             this.books.push(newBook);
         } else {
@@ -37,6 +37,6 @@ const author = {
 console.log(author.fullInformation());
 author.age = 78;
 console.log(author.fullInformation());
-author.addBook = "Dark Tower";
-console.log(author.booksList);
-author.addBook = "It";
+author.addBook("Dark Tower");
+console.log(`Updated books: ${author.booksList}`);
+author.addBook("It");
