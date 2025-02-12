@@ -1,8 +1,15 @@
+class selfError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = 'selfError';
+    }
+}
+
 async function fetchWithFallback(url, fallbackUrl){
     try {
         const response = await fetch(url);
         if (!response.ok) {
-            throw new Error(`HTML Error! Status: ${response.status}`);
+            throw new selfError(`HTML Error! Status: ${response.status}`);
         }
         return await response.json();
     } catch (error) {
@@ -10,12 +17,13 @@ async function fetchWithFallback(url, fallbackUrl){
         try {
             console.log("Try to get response from second service");
             const fallBackResponse = await fetch(fallbackUrl);
-            if (!fallbackUrl.ok) {
-                throw new Error(`Second response failed! Status: ${fallBackResponse.status}`);
+            if (!fallBackResponse.ok) {
+                throw new selfError(`Second response failed! Status: ${fallBackResponse.status}`);
             }
             return await fallBackResponse.json();
         } catch (fallBackError) {
-            throw new Error("Data undefined. Error to communicate with second service");
+            console.log("Data undefined.", fallBackError);
+            throw new selfError("Data undefined. Error to communicate with second service");
         }
     }
 }
