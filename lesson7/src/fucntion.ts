@@ -1,20 +1,21 @@
 //function of counting average
-const numbersArray : number[] = [1, 3, 5, 7];
-
-
-function countAverage() : number {
+function countAverage(array : number []) : number {
+    if(array.length === 0) {
+        throw new Error('Array can not be empty');
+    }
     let sum = 0;
-    for ( const element of numbersArray) {
+    for (const element of array) {
         sum += element;
     }
-    return sum / numbersArray.length;;
-}
+    return sum / array.length;
+};
 
-console.log(countAverage());
+console.log(countAverage([1, 2, 3, 4]));
+console.log(countAverage([1, 2, 3]));
 
 //function with arguments
-const numbers : number[] = [10, 20, 30, 40, 50];
-const strings : string[] = ['apple', 'cherry', 'peach'];
+const numbers = [10, 20, 30, 40, 50];
+const strings = ['apple', 'cherry', 'peach'];
 
 function countSum(arr : (number | string)[]) : number {
     return arr.reduce((sum : number, item : number | string) => {
