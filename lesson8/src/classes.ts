@@ -1,4 +1,4 @@
-import {User, getFile, ApiResponse} from './interface';
+import {User, ApiResponse} from './interface';
 
 export class UserInfo{
     public fullName: string;
@@ -24,16 +24,6 @@ export class UserInfo{
 
 }
 
-function transformUsers(apiResponse: ApiResponse): UserInfo[] {
+export function transformUsers(apiResponse: ApiResponse): UserInfo[] {
     return apiResponse.results.map(user => new UserInfo(user, 9219238));
 }
-
-(async () => {
-    try {
-        const data = await getFile();
-        const transformedUsers = transformUsers(data);
-        console.log('Transformed Users:', transformedUsers);
-    } catch (error) {
-        console.error('Error:', error);
-    }
-})();

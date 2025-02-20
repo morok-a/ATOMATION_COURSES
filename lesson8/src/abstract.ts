@@ -31,9 +31,3 @@ export class Motorbike extends Vehicle{
         return `Motorbike: ${this.brand} ${this.model} (${this.year}), Sidecar: ${this.sidecar ? 'Yes' : 'No'}`;
     }
 }
-
-const motorbike = new Motorbike('Kawasaki', 'Eliminator 500 SE', 2017, false);
-const car = new Car('Kia', 'Rio', 2012, 4);
-console.log(motorbike.getInfo());
-console.log(car.getInfo());
-

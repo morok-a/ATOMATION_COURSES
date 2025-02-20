@@ -88,9 +88,3 @@ export async function getFile(): Promise<ApiResponse>{
     const json = await response.json() as ApiResponse;
     return json;
 }
-
-(async () => {
-    const data = await getFile();
-    console.log('Data:', data);
-    console.log('Name of first user:', data.results[0].name.first);
-})();
