@@ -2,6 +2,7 @@ import { productList } from './ingredients';
 import { Cake } from './cake';
 import { IceCream } from './ice-cream';
 import { Candy } from './candy';
+import { CakeLover, CandyLover, IceCreamLover } from './dessert-lovers';
 
 const chocolateCake = new Cake('Chocolate Cake', [
     productList.flour,
@@ -45,3 +46,17 @@ console.log('\n');
 
 console.log(pistachioIceCream.infoAboutProduct());
 pistachioIceCream.prepare();
+
+
+// ICP
+console.log('\n');
+console.log('-----ICP-----');
+const bakeryFan = new CakeLover();
+const candyFan = new CandyLover();
+const iceCreamFan = new IceCreamLover();
+
+bakeryFan.enjoy(chocolateCake);
+console.log('-----------');
+candyFan.enjoy(caramelCandy);
+console.log('-----------');
+iceCreamFan.enjoy(pistachioIceCream);

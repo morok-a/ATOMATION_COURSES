@@ -1,8 +1,9 @@
 
 import { Ingredients } from './ingredients';
 import { BaseDessert } from './base-desserts';
+import { ICake} from './interfaces';
 
-export class Cake extends BaseDessert{
+export class Cake extends BaseDessert implements ICake{
     private layers: number;
     public constructor(name: string, ingredients: Ingredients[], layers: number ) {
         super(name, ingredients);

@@ -1,12 +1,13 @@
 import { BaseDessert } from './base-desserts';
 import { Ingredients } from './ingredients';
+import {IIceCream} from './interfaces';
 
-export class IceCream extends BaseDessert {
+export class IceCream extends BaseDessert implements IIceCream{
     public constructor(name: string, ingredients: Ingredients[], private flavor: string) {
         super(name, ingredients);
     }
 
-    private freeze(): void {
+    public freeze(): void {
         console.log(`${this.getName()} is freezing.`);
     }
 

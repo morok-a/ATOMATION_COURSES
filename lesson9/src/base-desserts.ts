@@ -1,7 +1,6 @@
-import { IDessert } from './idessert';
 import { Ingredients } from './ingredients';
 
-export abstract class BaseDessert implements IDessert {
+export abstract class BaseDessert {
     protected ingredients: Ingredients[];
     protected name: string;
 

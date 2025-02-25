@@ -1,13 +1,14 @@
 import { BaseDessert } from './base-desserts';
 import { Ingredients } from './ingredients';
+import { ICandy } from './interfaces';
 
-export class Candy extends BaseDessert {
+export class Candy extends BaseDessert implements ICandy{
 
     public constructor(name: string, ingredients: Ingredients[], private type: string) {
         super(name, ingredients);
     }
 
-    private package(): void {
+    public package(): void {
         console.log(`${this.getName()} is packing.`);
     }
 
