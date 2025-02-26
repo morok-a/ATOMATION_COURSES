@@ -3,6 +3,7 @@ import { Cake } from './cake';
 import { IceCream } from './ice-cream';
 import { Candy } from './candy';
 import { CakeLover, CandyLover, IceCreamLover } from './dessert-lovers';
+import { BaseDessert } from './base-desserts';
 
 const chocolateCake = new Cake('Chocolate Cake', [
     productList.flour,
@@ -31,22 +32,15 @@ const pistachioIceCream = new IceCream('Pistachio Ice Cream', [
     productList.milk
 ], 'pistachio');
 
+function doSomeActions(deserts: BaseDessert[]) : void {
+    deserts.forEach((desert) => {
+        console.log(desert.infoAboutProduct());
+        desert.prepare();
+        console.log('\n');
+    });
+}
 
-console.log(chocolateCake.infoAboutProduct());
-chocolateCake.prepare();
-console.log('\n');
-
-console.log(strawberryCake.infoAboutProduct());
-strawberryCake.prepare();
-console.log('\n');
-
-console.log(caramelCandy.infoAboutProduct());
-caramelCandy.prepare();
-console.log('\n');
-
-console.log(pistachioIceCream.infoAboutProduct());
-pistachioIceCream.prepare();
-
+doSomeActions([chocolateCake, caramelCandy, pistachioIceCream]);
 
 // ICP
 console.log('\n');
