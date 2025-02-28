@@ -5,10 +5,12 @@ import { getInfoAboutDessert } from 'src';
 import { Candy } from 'src/candy';
 
 describe('Ingredients methods verification', () => {
+
     afterEach(() => {
         console.log('Test case executed');
         console.log('--------------------');
     });
+
     describe('Calculating calories', () => {
         test('should calculate calories for sugar correctly', () => {
             const sugar = new Ingredients('Sugar', 387, 50);
@@ -40,6 +42,7 @@ describe('Desserts verification methods', () => {
         console.log('Running tests for Desserts...');
         chocolateCake = new Cake('Chocolate Cake', [], 3);
     });
+
     afterEach(() => {
         console.log('Test case executed');
         console.log('--------------------');
