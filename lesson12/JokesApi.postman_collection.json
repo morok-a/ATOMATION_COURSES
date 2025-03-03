@@ -1,0 +1,207 @@
+{
+	"info": {
+		"_postman_id": "7302717f-1d89-4f51-a3d5-89f27a167f99",
+		"name": "JokesApi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "3312123"
+	},
+	"item": [
+		{
+			"name": "Random Joke",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is below 500ms\", () => {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Joke contains correct fields with valid types\", () => {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"id\").that.is.a(\"number\");\r",
+							"    pm.expect(jsonData).to.have.property(\"type\").that.is.a(\"string\");\r",
+							"    pm.expect(jsonData).to.have.property(\"setup\").that.is.a(\"string\");\r",
+							"    pm.expect(jsonData).to.have.property(\"punchline\").that.is.a(\"string\");\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"console.log(response);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{theJokesApiBaseUrl}}/random"
+			},
+			"response": []
+		},
+		{
+			"name": "10 Random Jokes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response contains 10 jokes\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.be.an(\"array\").with.lengthOf(10);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Each joke contains all fields\", function(){\r",
+							"    const data = pm.response.json();\r",
+							"    data.forEach(joke => {\r",
+							"        pm.expect(joke).to.have.property(\"id\").that.is.a(\"number\");\r",
+							"        pm.expect(joke).to.have.property(\"type\").that.is.a(\"string\");\r",
+							"        pm.expect(joke).to.have.property(\"setup\").that.is.a(\"string\");\r",
+							"        pm.expect(joke).to.have.property(\"punchline\").that.is.a(\"string\");\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"console.log(response);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": "{{theJokesApiBaseUrl}}/random/10"
+			},
+			"response": []
+		},
+		{
+			"name": "Type",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response is an array\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.be.an(\"array\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response array is not empty\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.length).to.be.above(0);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Each type in array is a string\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    jsonData.forEach(type => {\r",
+							"        pm.expect(type).to.be.a(\"string\");\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains expected joke types\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.include(\"general\");\r",
+							"    pm.expect(jsonData).to.include(\"programming\");\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"console.log(response);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3005/types"
+			},
+			"response": []
+		},
+		{
+			"name": "Programing type",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Joke type is 'programming'\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0].type).to.equal(\"programming\");\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"console.log(response);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": "{{theJokesApiBaseUrl}}/programming/random"
+			},
+			"response": []
+		},
+		{
+			"name": "Not-existent joke",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": "{{theJokesApiBaseUrl}}/9999"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "theJokesApiBaseUrl",
+			"value": "http://localhost:3005/jokes",
+			"type": "string"
+		}
+	]
+}
