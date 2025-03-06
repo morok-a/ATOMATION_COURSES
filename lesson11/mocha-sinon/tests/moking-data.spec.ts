@@ -30,7 +30,6 @@ describe('mocking data example', () => {
         strawberryCake.calculateCalories();
         strawberryCake.infoAboutProduct();
         mock.verify();
-        mock.restore();
     });
 
     it('should check if prepare method is using mock', () => {
@@ -38,7 +37,6 @@ describe('mocking data example', () => {
         mock.expects('prepare').once();
         chocolateCake.prepare();
         mock.verify();
-        mock.restore();
     });
 });
 
