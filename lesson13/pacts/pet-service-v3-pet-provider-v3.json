@@ -1,0 +1,97 @@
+{
+  "consumer": {
+    "name": "pet-service-v3"
+  },
+  "interactions": [
+    {
+      "description": "a request to get a non-existent pet",
+      "providerStates": [
+        {
+          "name": "Pet does not exist"
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "path": "/v2/pet/9999"
+      },
+      "response": {
+        "body": {
+          "code": 404,
+          "message": "Pet not found",
+          "type": "error"
+        },
+        "headers": {
+          "Content-Type": "application/json",
+          "content-type": "application/json"
+        },
+        "status": 404
+      }
+    },
+    {
+      "description": "a request to get pet by id",
+      "providerStates": [
+        {
+          "name": "Pet exists"
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "path": "/v2/pet/2"
+      },
+      "response": {
+        "body": {
+          "category": {
+            "id": 2,
+            "name": "Sandy"
+          },
+          "id": 2,
+          "name": "GrKyh",
+          "photoUrls": [
+            "string"
+          ],
+          "status": "available",
+          "tags": [
+            {
+              "id": 2,
+              "name": "Sandy"
+            }
+          ]
+        },
+        "headers": {
+          "Content-Type": "application/json",
+          "content-type": "application/json"
+        },
+        "matchingRules": {
+          "body": {
+            "$": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          },
+          "header": {},
+          "status": {}
+        },
+        "status": 200
+      }
+    }
+  ],
+  "metadata": {
+    "pact-js": {
+      "version": "14.0.0"
+    },
+    "pactRust": {
+      "ffi": "0.4.22",
+      "models": "1.2.3"
+    },
+    "pactSpecification": {
+      "version": "3.0.0"
+    }
+  },
+  "provider": {
+    "name": "pet-provider-v3"
+  }
+}
