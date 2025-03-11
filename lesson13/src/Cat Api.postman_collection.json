@@ -17,11 +17,25 @@
 							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);\r",
 							"});\r",
 							"\r",
-							"let jsonData = pm.response.json();\r",
-							"pm.test(\"Image uploaded successfully\", function () {\r",
+							"const jsonData = pm.response.json();\r",
+							"pm.test(\"Image uploaded successfully \", function () {\r",
 							"    pm.expect(jsonData).to.have.property(\"id\");\r",
-							"    pm.environment.set(\"orangeCat\", jsonData.id);\r",
-							"});"
+							"    pm.collectionVariables.set(\"orangeCat\", jsonData.id);\r",
+							"    console.log(\"Saved image ID:\", jsonData.id);\r",
+							"});\r",
+							"\r",
+							"// let baseUrl = pm.environment.get(\"baseUrl\");\r",
+							"// if (!baseUrl) {\r",
+							"//     console.log(\"baseUrl is missing. Setting it manually.\");\r",
+							"//     pm.environment.set(\"baseUrl\", \"https://api.thecatapi.com/v1\");\r",
+							"//     baseUrl = pm.environment.get(\"baseUrl\");\r",
+							"// }\r",
+							"\r",
+							"// let imageUrl = baseUrl + \"/images/\" + pm.environment.get(\"orangeCat\");\r",
+							"// console.log(\"Sending GET request to:\", imageUrl);\r",
+							"\r",
+							"// console.log(\"Requesting image with ID:\", pm.environment.get(\"orangeCat\"));\r",
+							""
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -63,14 +77,13 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"// pm.test(\"Successful GET request\", function () {\r",
-							"//     pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);\r",
-							"\r",
-							"//     const resp = pm.response.json()\r",
-							"//         .find(x => x.id === pm.collectionVariables.get(\"image_id\"));\r",
-							"    \r",
-							"//     console.log(resp);\r",
-							"// });"
+							"console.log(\"Requesting image with ID:\", pm.collectionVariables.get(\"orangeCat\"));\r",
+							"pm.test(\"Uploaded image exists in database\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);\r",
+							"    let responseData = pm.response.json();\r",
+							"    pm.expect(responseData).to.have.property(\"id\", pm.environment.get(\"orangeCat\"));\r",
+							"});\r",
+							""
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -87,6 +100,38 @@
 					}
 				],
 				"url": "{{baseUrl}}/images/{{orangeCat}}"
+			},
+			"response": []
+		},
+		{
+			"name": "{{baseUrl}}/images/fake_id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Server returns 400 or 404 for non-existing image\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([400, 404]);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{x-api-key}}",
+						"type": "text"
+					}
+				],
+				"url": "{{baseUrl}}/images/fake_id_1234"
 			},
 			"response": []
 		},
@@ -335,7 +380,7 @@
 	"variable": [
 		{
 			"key": "baseUrl",
-			"value": " https://api.thecatapi.com/v1",
+			"value": "https://api.thecatapi.com/v1",
 			"type": "string"
 		},
 		{
@@ -356,6 +401,10 @@
 			"key": "favourite_id",
 			"value": "232519213",
 			"type": "string"
+		},
+		{
+			"key": "imageUrl",
+			"value": ""
 		}
 	]
 }

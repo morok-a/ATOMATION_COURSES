@@ -1,4 +1,5 @@
-import { MatchersV3, PactV3 } from '@pact-foundation/pact';
+import { MatchersV3, PactV3, Verifier } from '@pact-foundation/pact';
+import path from 'path';
 import { PetService } from 'src/services/pets-service';
 import { PetDto } from 'src/models/pet-dto';
 import { expect } from 'chai';
@@ -93,6 +94,15 @@ describe ('Pet Service Pact Test', () => {
                     }
                 }
             });
+        });
+    });
+    describe('Provider Verification', () => {
+        it('Should verify matching with service', () => {
+            return new Verifier({
+                providerBaseUrl: 'https://petstore.swagger.io/v2',
+                pactUrls: [path.resolve(process.cwd(), './pacts/pet-service-v3-pet-provider-v3.json')]
+            })
+                .verifyProvider();
         });
     });
 });
