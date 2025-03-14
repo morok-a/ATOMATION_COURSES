@@ -1,0 +1,410 @@
+{
+	"info": {
+		"_postman_id": "222e5af3-ea6a-46ba-a54b-3c0b0941780a",
+		"name": "Cat Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "3312123"
+	},
+	"item": [
+		{
+			"name": "/images/upload",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);\r",
+							"});\r",
+							"\r",
+							"const jsonData = pm.response.json();\r",
+							"pm.test(\"Image uploaded successfully \", function () {\r",
+							"    pm.expect(jsonData).to.have.property(\"id\");\r",
+							"    pm.collectionVariables.set(\"orangeCat\", jsonData.id);\r",
+							"    console.log(\"Saved image ID:\", jsonData.id);\r",
+							"});\r",
+							"\r",
+							"// let baseUrl = pm.environment.get(\"baseUrl\");\r",
+							"// if (!baseUrl) {\r",
+							"//     console.log(\"baseUrl is missing. Setting it manually.\");\r",
+							"//     pm.environment.set(\"baseUrl\", \"https://api.thecatapi.com/v1\");\r",
+							"//     baseUrl = pm.environment.get(\"baseUrl\");\r",
+							"// }\r",
+							"\r",
+							"// let imageUrl = baseUrl + \"/images/\" + pm.environment.get(\"orangeCat\");\r",
+							"// console.log(\"Sending GET request to:\", imageUrl);\r",
+							"\r",
+							"// console.log(\"Requesting image with ID:\", pm.environment.get(\"orangeCat\"));\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{x-api-key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "postman-cloud:///1effc251-a591-4550-a056-37f59a7b5d91"
+						},
+						{
+							"key": "sub_id",
+							"value": "OrangeCatFile",
+							"type": "text"
+						}
+					]
+				},
+				"url": "{{baseUrl}}/images/upload"
+			},
+			"response": []
+		},
+		{
+			"name": "/images/orangeCat",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(\"Requesting image with ID:\", pm.collectionVariables.get(\"orangeCat\"));\r",
+							"pm.test(\"Uploaded image exists in database\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);\r",
+							"    let responseData = pm.response.json();\r",
+							"    pm.expect(responseData).to.have.property(\"id\", pm.environment.get(\"orangeCat\"));\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{x-api-key}}",
+						"type": "text"
+					}
+				],
+				"url": "{{baseUrl}}/images/{{orangeCat}}"
+			},
+			"response": []
+		},
+		{
+			"name": "{{baseUrl}}/images/fake_id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Server returns 400 or 404 for non-existing image\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([400, 404]);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{x-api-key}}",
+						"type": "text"
+					}
+				],
+				"url": "{{baseUrl}}/images/fake_id_1234"
+			},
+			"response": []
+		},
+		{
+			"name": "/votes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);\r",
+							"});\r",
+							"\r",
+							"let jsonData = pm.response.json();\r",
+							"pm.test(\"Vote uploaded\", function () {\r",
+							"    pm.expect(jsonData).to.have.property(\"value\").to.be.eql(1);\r",
+							"    pm.environment.set(\"vote_id\", jsonData.id);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{x-api-key}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"image_id\": \"{{orangeCat}}\",\r\n  \"value\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baseUrl}}/votes"
+			},
+			"response": []
+		},
+		{
+			"name": "/votes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful GET request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Vote exists in the list\", function () {\r",
+							"    const resp = pm.response.json()\r",
+							"        .find(vote => vote.id === pm.collectionVariables.get(\"vote_id\"));\r",
+							"    \r",
+							"    console.log(resp);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{x-api-key}}",
+						"type": "text"
+					}
+				],
+				"url": "{{baseUrl}}/votes"
+			},
+			"response": []
+		},
+		{
+			"name": "/favourites",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);\r",
+							"});\r",
+							"\r",
+							"let jsonData = pm.response.json();\r",
+							"pm.test(\"Added to favourites successfully\", function () {\r",
+							"    pm.expect(jsonData).to.have.property(\"id\");\r",
+							"    pm.environment.set(\"favourites_id\", jsonData.id);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{x-api-key}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"image_id\": \"{{orangeCat}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baseUrl}}/favourites"
+			},
+			"response": []
+		},
+		{
+			"name": "/favourites",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Vote exists in the list\", function () {\r",
+							"    const resp = pm.response.json()\r",
+							"        .find(favourites => favourites.id === pm.collectionVariables.get(\"favourites_id\"));\r",
+							"    \r",
+							"    console.log(resp);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{x-api-key}}",
+						"type": "text"
+					}
+				],
+				"url": "{{baseUrl}}/favourites"
+			},
+			"response": []
+		},
+		{
+			"name": "/votes/{{vote_id}}",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{x-api-key}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": "{{baseUrl}}/votes/{{vote_id}}"
+			},
+			"response": []
+		},
+		{
+			"name": "favourites/{{favourite_id}}",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{x-api-key}}",
+						"type": "text"
+					}
+				],
+				"url": "{{baseUrl}}/favourites/{{favourite_id}}"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://api.thecatapi.com/v1",
+			"type": "string"
+		},
+		{
+			"key": "x-api-key",
+			"value": "live_SKe3Y4UbZCzrUvVOUoAyTTy127sMz9dJbCAZwe46mCgQP58yfCGuR6suu8hEnR0O",
+			"type": "string"
+		},
+		{
+			"key": "orangeCat",
+			"value": "n_oHCbQlv"
+		},
+		{
+			"key": "vote_id",
+			"value": "1256336",
+			"type": "string"
+		},
+		{
+			"key": "favourite_id",
+			"value": "232519213",
+			"type": "string"
+		},
+		{
+			"key": "imageUrl",
+			"value": ""
+		}
+	]
+}
