@@ -1,0 +1,27 @@
+Test Scenario for authentication
+Steps:
+1. Open web-site https://www.codedex.io/
+2. Tap "Get Started" button - div.center-content > button
+3. Observe that the video content started.
+4. Tap close video on the right corner - #end-video
+5. Sign up into account: 
+	For email - form div.input-fields div:nth-child(1) div input[type=email]
+	for Password - form div.input-fields div:nth-child(2) div input[type=password]
+6. Tap button "Sign in" - form > div.submit-btn-container > button
+
+Test scenario for open Python course
+1. Tap on the "Learn" button on the top navigation bar -  div.nav-container-links div:nth-child(1) a button
+2. Select Python course and tap on it - #scroll-target-for-course-row-python div:nth-child(1) div.bottom-card div.top-card
+3. Tap in the button "Start Learning for Free" - #parallax-banner .third-layer div:nth-child(1) div a
+4. Observe that you started the course.
+5. Change theme from dark to light - div.icon-container.nes-pointer svg g path
+
+Test scenario for editing profile
+1. Tap View Profile - //*[@id="__next"]/div[2]/div[4]/div[1]/div[2]/div[1]/a/button
+2. Tap "Edit profile" button - //div[@class="edit-profile-btn"]
+3. Enter your name in the field - //div[@class="inputs-container"]/div[@class="names"]/label/input[@id="name"]
+4. Enter you username - //div[@class="inputs-container"]/div[@class="names"]/label/input[@id="username"]
+5. Select skill set in checkbox field - //div[@class="langauge-checkbox"]
+6. Save your changes - //div[@class="buttons-container"]/button[@type="submit"]
+7. Tap "View Profile" - //div[@class="buttons-container"]/a[@class="nes-btn"]
+8. Observe that your profile was updated.
