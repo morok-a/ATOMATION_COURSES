@@ -44,6 +44,11 @@ export default defineConfig({
             use: { ...devices['Desktop Chrome'] },
             testMatch: '**/*coddex.spec.ts'
         },
+        {
+            name: 'yakaboo',
+            use: { ...devices['Desktop Chrome'] },
+            testMatch: '**/*yakaboo.spec.ts'
+        },
         // {
         //     name: 'chromium',
         //     use: { ...devices['Desktop Chrome'] },
