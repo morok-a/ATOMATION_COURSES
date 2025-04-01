@@ -8,8 +8,8 @@ test.describe('Yakaboo', () => {
     test.beforeEach(async ({ browser }) => {
         const context = await browser.newContext();
         page = await context.newPage();
-        await page.goto('https://www.yakaboo.ua/');
         yakabooPage = new YakabooHomePage(page);
+        await yakabooPage.goTo();
     });
 
     test('Should choose fiction category', async () => {
@@ -17,7 +17,9 @@ test.describe('Yakaboo', () => {
         await yakabooPage.openPaperBooks();
         await yakabooPage.openFictionBooks();
         await page.waitForURL('https://www.yakaboo.ua/ua/knigi/hudozhestvennaja-literatura.html?book_publication=Bumazhnaja', { timeout: 5000 });
-        expect(page.url()).toBe('https://www.yakaboo.ua/ua/knigi/hudozhestvennaja-literatura.html?book_publication=Bumazhnaja');
+        await yakabooPage.getAmountOfBooks();
+        await expect(yakabooPage.amountOfBooks).toBeVisible();
+        await expect(yakabooPage.amountOfBooks).toContainText('товари');
     });
 
     test('Should search for book', async () => {

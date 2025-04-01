@@ -17,6 +17,7 @@
     "forceConsistentCasingInFileNames": true,            /* Ensure that casing is correct in imports. */
     "moduleResolution": "node",
     "experimentalDecorators": true,
+    "types": ["node", "jest", "@testing-library/jest-dom"],
 
     /* Type Checking */
     "strict": true,                                      /* Enable all strict type-checking options. */

@@ -21,25 +21,29 @@ export class YakabooHomePage {
         return this.page.locator('//*/div[1]/ul/div[3]/span');
     }
 
+    public get amountOfBooks(): Locator {
+        return this.page.locator('div.category__controls > div.amount');
+    }
+
     public constructor(private page: Page) {}
 
+    public async goTo(): Promise<void> {
+        await this.page.goto('https://yakaboo.ua/');
+    }
+
     public async openCategoryField(): Promise<void> {
-        await this.categoryField.waitFor({ state: 'visible' });
         await this.categoryField.click();
     }
 
     public async openPaperBooks(): Promise<void> {
-        await this.paperBooks.waitFor({ state: 'visible' });
         await this.paperBooks.click();
     }
 
     public async openFictionBooks(): Promise<void> {
-        await this.fictionBooks.waitFor({ state: 'visible' });
         await this.fictionBooks.click();
     }
 
     public async openSearchField(): Promise<void> {
-        await this.searchFiled.waitFor({ state: 'visible' });
         await this.searchFiled.click();
     }
 
@@ -49,7 +53,10 @@ export class YakabooHomePage {
     }
 
     public async selectBookFromList(): Promise<void> {
-        await this.selectBook.waitFor({ state: 'visible' });
         await this.selectBook.click();
+    }
+
+    public async getAmountOfBooks(): Promise<string> {
+        return await this.amountOfBooks.innerText();
     }
 }

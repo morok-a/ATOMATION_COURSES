@@ -12,12 +12,12 @@ test.describe('Test Scenario for authentication and starting course', () => {
     test.beforeEach(async ({ browser }) => {
         const context = await browser.newContext();
         page = await context.newPage();
-        await page.goto('https://codedex.io/');
 
         loginPage = new LoginPage(page);
         homePage = new HomePage(page);
         coursePage = new CoursePage(page);
         videoPage = new VideoPage(page);
+        await homePage.goTo();
     });
 
     test('Should sign in into site', async () => {
@@ -25,7 +25,7 @@ test.describe('Test Scenario for authentication and starting course', () => {
         await videoPage.closeVideo();
         await loginPage.openLoginPage('nastasuper5@gmail.com', 'SomePassword');
         await page.waitForURL('https://www.codedex.io/home', { timeout: 5000 });
-        expect(page.url()).toBe('https://www.codedex.io/home');
+        await expect(homePage.getWelcomeText()).toBeTruthy();
     });
 
     test('Should open Python course', async () => {
@@ -34,5 +34,7 @@ test.describe('Test Scenario for authentication and starting course', () => {
         await coursePage.startCourse();
         await page.waitForURL('https://www.codedex.io/python/01-setting-up', { timeout: 5000 });
         expect(page.url()).toBe('https://www.codedex.io/python/01-setting-up');
+        await coursePage.checkHeader();
+        await expect(coursePage.header).toBeVisible();
     });
 });

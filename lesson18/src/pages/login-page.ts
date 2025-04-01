@@ -20,16 +20,9 @@ export class LoginPage {
     public constructor(private page: Page) {}
 
     public async openLoginPage(email: string, password: string): Promise<void> {
-        await this.loginButton.waitFor();
         await this.loginButton.click();
-
-        await this.emailInput.waitFor();
         await this.emailInput.fill(email);
-
-        await this.passwordInput.waitFor();
         await this.passwordInput.fill(password);
-
-        await this.submitButton.waitFor();
         await this.submitButton.click();
     }
 }

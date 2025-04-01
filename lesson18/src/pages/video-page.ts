@@ -16,12 +16,10 @@ export class VideoPage {
     public constructor(private page: Page) {}
 
     public async startVideo(): Promise<void> {
-        await this.startButton.waitFor({ state: 'visible' });
         await this.startButton.click();
     }
 
     public async waitForVideoToPlay(): Promise<boolean> {
-        await this.video.waitFor({ state: 'visible' });
         await this.page.waitForTimeout(5000);
 
         const currentTime: number = await this.page.evaluate(() => {
@@ -33,7 +31,6 @@ export class VideoPage {
     }
 
     public async closeVideo(): Promise<void> {
-        await this.endVideoButton.waitFor({ state: 'visible' });
         await this.endVideoButton.click();
     }
 }
