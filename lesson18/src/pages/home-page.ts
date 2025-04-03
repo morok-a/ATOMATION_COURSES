@@ -13,6 +13,7 @@ export class HomePage {
 
     public async goTo(): Promise<void> {
         await this.page.goto('https://www.codedex.io/');
+        await this.firstMenuButton.waitFor();
     }
 
     public async openFirstMenuItem(): Promise<void> {

@@ -23,7 +23,7 @@ export class CoursePage {
         await this.startCourseButton.click();
     }
 
-    public async checkHeader(): Promise<void> {
+    public async waitForHeader(): Promise<void> {
         await this.header.waitFor();
     }
 }

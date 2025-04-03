@@ -34,7 +34,7 @@ test.describe('Test Scenario for authentication and starting course', () => {
         await coursePage.startCourse();
         await page.waitForURL('https://www.codedex.io/python/01-setting-up', { timeout: 5000 });
         expect(page.url()).toBe('https://www.codedex.io/python/01-setting-up');
-        await coursePage.checkHeader();
+        await coursePage.waitForHeader();
         await expect(coursePage.header).toBeVisible();
     });
 });

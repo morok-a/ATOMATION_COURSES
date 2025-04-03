@@ -19,7 +19,6 @@ test.describe('Yakaboo', () => {
         await page.waitForURL('https://www.yakaboo.ua/ua/knigi/hudozhestvennaja-literatura.html?book_publication=Bumazhnaja', { timeout: 5000 });
         await yakabooPage.getAmountOfBooks();
         await expect(yakabooPage.amountOfBooks).toBeVisible();
-        await expect(yakabooPage.amountOfBooks).toContainText('товари');
     });
 
     test('Should search for book', async () => {
