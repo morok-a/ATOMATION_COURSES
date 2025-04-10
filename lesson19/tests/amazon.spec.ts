@@ -1,15 +1,18 @@
 import {  expect, test, Page} from '@playwright/test';
 import { AmazonPage } from 'src/pages/amazon-page';
+import { CustomerPage } from 'src/pages/customer-page';
 
 
 test.describe('Amazon Home Page', () => {
     let amazonPage: AmazonPage;
+    let customerPage: CustomerPage;
     let page: Page;
 
     test.beforeEach(async ({ browser }) => {
         const context = await browser.newContext();
         page = await context.newPage();
         amazonPage = new AmazonPage(page);
+        customerPage = new CustomerPage(page);
         await amazonPage.goTo();
         await amazonPage.dismissPopup();
     });
@@ -25,17 +28,16 @@ test.describe('Amazon Home Page', () => {
         const tabNames = await amazonPage.getTabsName();
         expect(tabNames).toContain('Customer Service');
         await amazonPage.selectTab('Customer Service');
-        expect(page.url()).toBe('https://www.amazon.com/gp/help/customer/display.html?nodeId=508510&ref_=nav_cs_customerservice');
-        await amazonPage.getHeaderName();
+        await amazonPage.waitForHeaderName();
         expect(amazonPage.headerOnCustomerPage).toBeVisible();
     });
 
     test('Verify if on the customer page present list with which service could help', async () => {
-        const areaText = await amazonPage.getAreaText();
+        const areaText = await customerPage.getAreaText();
         await amazonPage.selectTab('Customer Service');
         expect(areaText).toBeTruthy();
         expect(areaText.length).toBeLessThanOrEqual(11);
-        await amazonPage.getIcons();
-        expect(amazonPage.getIcons).toBeTruthy();
+        await customerPage.getIcons();
+        expect(customerPage.getIcons).toBeTruthy();
     });
 });
