@@ -1,4 +1,0 @@
-"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","2044","Verify if on the customer page present list with which service could help","amazon""","Mon Apr 14 23:32:26 EEST 2025","passed","Mon Apr 14 23:32:28 EEST 2025","Amazon Home Page","amazon.spec.ts","",""
-"","2126","Should select tab ""Customer Service""","amazon""","Mon Apr 14 23:32:26 EEST 2025","passed","Mon Apr 14 23:32:28 EEST 2025","Amazon Home Page","amazon.spec.ts","",""
-"","1543","Verify if tab contains ""Today's Deals"" and there is no than 5 tabs inside","amazon""","Mon Apr 14 23:32:26 EEST 2025","passed","Mon Apr 14 23:32:27 EEST 2025","Amazon Home Page","amazon.spec.ts","",""
