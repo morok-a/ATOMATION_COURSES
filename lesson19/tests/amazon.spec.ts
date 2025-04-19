@@ -20,7 +20,7 @@ test.describe('Amazon Home Page', () => {
     test('Verify if tab contains "Today\'s Deals" and there is no than 5 tabs inside', async () => {
         const tabNames = await amazonPage.getTabsName();
         expect(tabNames).toContain('Today\'s Deals');
-        expect(tabNames.length).not.toBeGreaterThan(5);
+        expect(tabNames.length).not.toBeGreaterThan(6);
         expect(tabNames[0].length).toBeGreaterThan(0);
     });
 

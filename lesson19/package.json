@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "playwright test"
+    "test": "playwright test",
+    "postinstall": "npm update browserstack-node-sdk",
+    "test-browserstack": "browserstack-node-sdk playwright test"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +20,9 @@
     "@types/node": "^22.14.0",
     "@typescript-eslint/eslint-plugin": "^8.29.0",
     "@typescript-eslint/parser": "^8.29.0",
+    "allure-commandline": "^2.33.0",
+    "allure-playwright": "^3.2.1",
+    "browserstack-node-sdk": "^1.34.52",
     "eslint": "^9.23.0",
     "eslint-plugin-prettier": "^5.2.6",
     "eslint-plugin-unicorn": "^58.0.0",
